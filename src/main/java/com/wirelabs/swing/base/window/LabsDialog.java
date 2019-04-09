@@ -14,12 +14,18 @@ import javax.swing.JTextField;
 import com.wirelabs.common.utils.StringManager;
 import com.wirelabs.swing.dialogs.LabsMessageDialog;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
- * Classe controla dialogs do sistema
  *
  * @author jpereira
  */
+@Slf4j
 public abstract class LabsDialog extends JDialog implements BaseWindowController {
+
+	
+
+	private static final long serialVersionUID = 3581774347272703252L;
 
 	private Object dialog;
 	private final String title = "Labs Wire Software System";
@@ -64,12 +70,14 @@ public abstract class LabsDialog extends JDialog implements BaseWindowController
 
 	@Override
 	public void clearFields() {
-		// limpa filtros
 		try {
 			if (dialog == null) {
-				LabsMessageDialog.error("Dialog nao definida para clear ,\n definir no construtor da classe");
+				LabsMessageDialog.error(DIALOG_UNDEFINED);
 				return;
 			}
+			/*
+			 * Text Field
+			 */
 			for (final Field field : dialog.getClass().getDeclaredFields()) {
 				field.setAccessible(true);
 				if (JTextField.class.isAssignableFrom(field.getType())) {
@@ -78,7 +86,10 @@ public abstract class LabsDialog extends JDialog implements BaseWindowController
 						text.setText("");
 					}
 				}
-				// text area
+
+				/*
+				 * Text Area
+				 */
 				if (JTextArea.class.isAssignableFrom(field.getType())) {
 					final JTextArea text = (JTextArea) field.get(this);
 					if (text != null) {
@@ -87,17 +98,16 @@ public abstract class LabsDialog extends JDialog implements BaseWindowController
 				}
 			}
 		} catch (final Exception ex) {
-			ex.printStackTrace();
+			log.error(ex.getMessage(), ex);
 			LabsMessageDialog.error(ex.getMessage());
 		}
 	}
 
 	@Override
 	public boolean hasFieldValue() {
-		// limpa filtros
 		try {
 			if (dialog == null) {
-				throw new Exception("Dialog nao definida para clear ,\n definir no construtor da classe");
+				throw new Exception(DIALOG_UNDEFINED);
 			}
 			for (final Field field : dialog.getClass().getDeclaredFields()) {
 				if (JTextField.class.isAssignableFrom(field.getType())) {
@@ -109,7 +119,7 @@ public abstract class LabsDialog extends JDialog implements BaseWindowController
 				}
 			}
 		} catch (final Exception ex) {
-			ex.printStackTrace();
+			log.error(ex.getMessage(), ex);
 			LabsMessageDialog.error(ex.getMessage());
 		}
 		return false;

@@ -7,6 +7,7 @@ package com.wirelabs.swing.base.window;
 
 import java.awt.event.ActionEvent;
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -26,11 +27,13 @@ import com.wirelabs.swing.dialogs.LabsMessageDialog;
  */
 public abstract class LabsFrameSearchCrud<T> extends LabsFrame {
 
+	private static final long serialVersionUID = -5358037971101653130L;
+
 	protected T model;
 
-	protected abstract void startTable();
+	protected abstract void startTable(List<T> entities);
 
-	protected abstract void start() throws Exception;
+	protected abstract void start();
 
 	/**
 	 * Metodo define propriedades para inicilizacao deve ser colocado no construtor
@@ -53,6 +56,7 @@ public abstract class LabsFrameSearchCrud<T> extends LabsFrame {
 			setLocationRelativeTo(null);
 		}
 		this.model = entity;
+		this.start();
 		this.setVisible(true);
 	}
 
@@ -95,6 +99,8 @@ public abstract class LabsFrameSearchCrud<T> extends LabsFrame {
 	 * Classe aninhada que define shortcut
 	 */
 	protected class ShortCutKey extends AbstractAction {
+
+		private static final long serialVersionUID = 6062771196314301072L;
 
 		int opcao;
 

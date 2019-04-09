@@ -13,9 +13,9 @@ import javax.swing.JComboBox;
  */
 public class LabsComboBox<Object> extends JComboBox<Object> {
 
-    public LabsComboBox() {
-        this.setBorder(null);
-        this.setBackground(LabsColor.getWhiteColor());
-    }
+	public LabsComboBox() {
+		this.setBorder(null);
+		this.setBackground(LabsColor.getWhiteColor());
+	}
 
 }

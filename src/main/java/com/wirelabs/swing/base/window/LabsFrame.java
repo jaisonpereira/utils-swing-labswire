@@ -5,6 +5,7 @@
  */
 package com.wirelabs.swing.base.window;
 
+import java.awt.Color;
 import java.lang.reflect.Field;
 
 import javax.swing.JFrame;
@@ -18,6 +19,8 @@ import com.wirelabs.swing.dialogs.LabsMessageDialog;
  * @author jpereira
  */
 public abstract class LabsFrame extends JFrame implements BaseWindowController {
+
+	private static final long serialVersionUID = 1405201091096745860L;
 
 	protected Object frame;
 
@@ -33,10 +36,9 @@ public abstract class LabsFrame extends JFrame implements BaseWindowController {
 
 	@Override
 	public void clearFields() {
-		// limpa filtros
 		try {
 			if (frame == null) {
-				LabsMessageDialog.error("Dialog nao definida para clear ,\n definir no construtor da classe");
+				LabsMessageDialog.error(DIALOG_UNDEFINED);
 				return;
 			}
 			for (final Field field : frame.getClass().getDeclaredFields()) {
@@ -73,6 +75,7 @@ public abstract class LabsFrame extends JFrame implements BaseWindowController {
 		}
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		setBackground(new java.awt.Color(255, 255, 255));
+		this.getContentPane().setBackground(Color.WHITE);
 		setLayout(new java.awt.CardLayout());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

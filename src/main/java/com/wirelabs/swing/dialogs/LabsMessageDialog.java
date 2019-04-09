@@ -77,7 +77,7 @@ public class LabsMessageDialog {
 	 * Executa uma saida forcada no sistema
 	 */
 	public static void saidaForcada() {
-		JOptionPane.showMessageDialog(null, "O Sistema será fechado", "O Sistema sera fechado ", 0);
+		JOptionPane.showMessageDialog(null, "O Sistema será fechado", "O Sistema será fechado ", 0);
 		System.exit(0);
 	}
 }

@@ -18,21 +18,18 @@ import com.wirelabs.swing.dialogs.componentes.LabsNumberFormatField;
 
 /**
  *
- * @author jpereira
- *
- *         EncapsulaConversoes de field
- *
+ * @author jpereira Util for getValue field swing
  */
 public interface FieldController {
 
-	default Object getField(JComboBox combo) throws Exception {
+	default Object getField(JComboBox<?> combo) throws Exception {
 		try {
 			if (combo.getSelectedItem() == null) {
 				return null;
 			}
 			return combo.getSelectedItem();
 		} catch (Exception e) {
-			throw new Exception("erro ao capturar String ", e);
+			throw new Exception("Error on getField from  jcombo ", e);
 		}
 	}
 
@@ -43,7 +40,7 @@ public interface FieldController {
 			}
 			return field.getText();
 		} catch (Exception e) {
-			throw new Exception("erro ao capturar String ", e);
+			throw new Exception("error in get String from textArea ", e);
 		}
 	}
 
@@ -54,7 +51,7 @@ public interface FieldController {
 			}
 			return field.getText();
 		} catch (Exception e) {
-			throw new Exception("erro ao capturar String ", e);
+			throw new Exception("error on get String from textField ", e);
 		}
 	}
 
@@ -65,7 +62,7 @@ public interface FieldController {
 			}
 			return ((LabsNumberFormatField) field).getValue();
 		} catch (Exception e) {
-			throw new Exception("erro ao capturar bigdecimal ", e);
+			throw new Exception("error on get bigDecimalValue ", e);
 		}
 	}
 
@@ -76,7 +73,7 @@ public interface FieldController {
 			}
 			return Short.valueOf(field.getText());
 		} catch (Exception e) {
-			throw new Exception("erro ao capturar short ", e);
+			throw new Exception("error on get Short value from textfield ", e);
 		}
 	}
 

@@ -5,6 +5,8 @@
  */
 package com.wirelabs.swing.dialogs.componentes;
 
+import java.awt.Color;
+
 import javax.swing.JTable;
 
 /**
@@ -13,15 +15,15 @@ import javax.swing.JTable;
  */
 public class LabsTable extends JTable {
 
-    public LabsTable() {
-        initialize();
-    }
+	public LabsTable() {
+		initialize();
+	}
 
-    private void initialize() {
-        this.setGridColor(LabsColor.getWhiteColor());
-        this.setBackground(LabsColor.getWhiteColor());
-        this.setForeground(LabsColor.getBlackColor());
-        this.setSelectionBackground(LabsColor.getSuccessColor());
-        this.setSelectionForeground(LabsColor.getBlackColor());
-    }
+	private void initialize() {
+		this.setGridColor(LabsColor.getWhiteColor());
+		this.setBackground(Color.WHITE);
+		this.setForeground(LabsColor.getBlackColor());
+		this.setSelectionBackground(LabsColor.getSuccessColor());
+		this.setSelectionForeground(LabsColor.getBlackColor());
+	}
 }

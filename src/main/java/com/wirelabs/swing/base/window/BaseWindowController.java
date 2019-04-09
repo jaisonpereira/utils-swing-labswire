@@ -12,14 +12,16 @@ package com.wirelabs.swing.base.window;
  */
 public interface BaseWindowController {
 
-    abstract void clearFields();
+	static final String DIALOG_UNDEFINED = "Dialog not defined for clear ,\n you need define on constructor class";
 
-    abstract boolean hasFieldValue();
+	abstract void clearFields();
 
-    abstract void setTargetWindow(Object dialog);
+	abstract boolean hasFieldValue();
 
-    abstract void closeAndCleanFields();
+	abstract void setTargetWindow(Object dialog);
 
-    abstract void executeCancel();
+	abstract void closeAndCleanFields();
+
+	abstract void executeCancel();
 
 }

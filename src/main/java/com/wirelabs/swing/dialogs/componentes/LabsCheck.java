@@ -13,11 +13,13 @@ import javax.swing.JCheckBox;
  */
 public class LabsCheck extends JCheckBox {
 
-    public LabsCheck() {
-        initialize();
-    }
+	private static final long serialVersionUID = 529988318213901395L;
 
-    private void initialize() {
-        this.setBorder(null);
-    }
+	public LabsCheck() {
+		initialize();
+	}
+
+	private void initialize() {
+		this.setBorder(null);
+	}
 }

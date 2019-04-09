@@ -17,145 +17,146 @@ import com.wirelabs.swing.dialogs.LabsMessageDialog;
 /**
  *
  * @author jpereira
- *
- * dialog abstrata para crud
  * @param <T>
  */
 public abstract class LabsDialogCrud<T extends Object> extends LabsDialog implements FieldController {
 
-    protected T model;
+	private static final long serialVersionUID = -2529098664622631884L;
 
-    protected AccessibleWindow accesible;
+	protected T model;
 
-    protected abstract T getModelFromFields() throws Exception;
+	protected AccessibleWindow accesible;
 
-    protected abstract void setModelForFields() throws Exception;
+	protected abstract T getModelFromFields() throws Exception;
 
-    protected abstract void save() throws Exception;
+	protected abstract void setModelFromFields() throws Exception;
 
-    protected abstract void start();
+	protected abstract void save() throws Exception;
 
-    /**
-     * Metodo define propriedades para inicilizacao deve ser colocado no
-     * construtor
-     *
-     * @param dialog
-     * @param panel
-     */
-    protected void setPropertiesDialog(Object dialog, JPanel panel) {
-        setTargetWindow(this);
-        setActionPanelShortCut(panel);
-    }
+	protected abstract void start();
 
-    /**
-     *
-     * @param entity parametro seta model caso exista
-     * @param window janela de comunicação
-     * @throws java.lang.Exception
-     */
-    public void initialize(T entity, AccessibleWindow window) throws Exception {
-        this.accesible = window;
-        initialize(entity);
-    }
+	/**
+	 * Method defines values for contructor
+	 *
+	 * @param dialog
+	 * @param panel
+	 */
+	protected void setPropertiesDialog(Object dialog, JPanel panel) {
+		setTargetWindow(this);
+		setActionPanelShortCut(panel);
+	}
 
-    /**
-     * Metodo starta janela
-     *
-     * @param entity
-     * @throws java.lang.Exception
-     */
-    public void initialize(T entity) throws Exception {
-        if (entity == null) {
-            throw new RuntimeException("Instanciar model a ser utilizado ");
-        }
-        this.model = entity;
-        setModelForFields();
-        setLocationRelativeTo(null);
-        start();
-        this.setVisible(true);
-    }
+	/**
+	 *
+	 * @param entity parametro seta model caso exista
+	 * @param window janela de comunicação
+	 * @throws java.lang.Exception
+	 */
+	public void initialize(T entity, AccessibleWindow window) throws Exception {
+		this.accesible = window;
+		initialize(entity);
+	}
 
-    protected void executeSave() {
-        try {
-            save();
-            this.model = null;
-            setModelForFields();
-        } catch (Exception e) {
-            LabsMessageDialog.error(e);
-        }
-    }
+	/**
+	 * Metodo starta janela
+	 *
+	 * @param entity
+	 * @throws java.lang.Exception
+	 */
+	public void initialize(T entity) throws Exception {
+		if (entity == null) {
+			throw new RuntimeException("Required entity not null");
+		}
+		this.model = entity;
+		setModelFromFields();
+		setLocationRelativeTo(null);
+		start();
+		this.setVisible(true);
+	}
 
-    protected void executeAccessibleSave() throws Exception {
-        try {
-            this.model = getModelFromFields();
-            accesible.comunicationWindow((AccessibleWindow) this);
-            this.model = null;
-            setModelForFields();
-        } catch (Exception e) {
-            LabsMessageDialog.error(e);
-        }
-    }
+	protected void executeSave() {
+		try {
+			save();
+			this.model = null;
+			getModelFromFields();
+		} catch (Exception e) {
+			LabsMessageDialog.error(e);
+		}
+	}
 
-    @Override
-    public void executeCancel() {
-        if (hasFieldValue()) {
-            if (LabsMessageDialog.confirmDialog("Deseja realmente cancelar ? todas as alterações serão perdidas", "Cancelar Edição")) {
-                this.model = null;
-                closeAndCleanFields();
-            }
-        } else {
-            this.model = null;
-            closeAndCleanFields();
-        }
-    }
+	protected void executeAccessibleSave() throws Exception {
+		try {
+			this.model = getModelFromFields();
+			accesible.comunicationWindow((AccessibleWindow) this);
+			this.model = null;
+			clearFields();
+		} catch (Exception e) {
+			LabsMessageDialog.error(e);
+		}
+	}
 
-    protected ShortCutKey cancelar = new ShortCutKey(2);
+	@Override
+	public void executeCancel() {
+		if (hasFieldValue()) {
+			if (LabsMessageDialog.confirmDialog("Deseja realmente cancelar ? todas as alterações serão perdidas",
+					"Cancelar Edição")) {
+				this.model = null;
+				closeAndCleanFields();
+			}
+		} else {
+			this.model = null;
+			closeAndCleanFields();
+		}
+	}
 
-    /**
-     * Classe aninhada que define shortcut
-     */
-    protected class ShortCutKey extends AbstractAction {
+	protected ShortCutKey cancelar = new ShortCutKey(2);
 
-        int opcao;
+	/**
+	 * Classe aninhada que define shortcut
+	 */
+	protected class ShortCutKey extends AbstractAction {
 
-        public ShortCutKey(int opcao) {
-            this.opcao = opcao;
-        }
+		private static final long serialVersionUID = -1961330223210587227L;
+		int opcao;
 
-        public void actionPerformed(ActionEvent e) {
-            switch (opcao) {
-                case 1:
-                    break;
-                case 2:
-                    executeCancel();
-                    break;
-                default:
-            }
-        }
-    }
+		public ShortCutKey(int opcao) {
+			this.opcao = opcao;
+		}
 
-    protected void setActionPanelShortCut(JPanel painel) {
-        //Damos um nome para cada ação. Esse nome é útil pois mais de   
-        //uma tecla pode ser associada a cada ação, como veremos abaixo  
-        ActionMap actionMap = painel.getActionMap();
-        actionMap.put("cancelar", cancelar);
-        painel.setActionMap(actionMap);
-        InputMap imap = painel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-        imap = setDefaultActions(imap);
-    }
+		public void actionPerformed(ActionEvent e) {
+			switch (opcao) {
+			case 1:
+				break;
+			case 2:
+				executeCancel();
+				break;
+			default:
+			}
+		}
+	}
 
-    protected InputMap setDefaultActions(InputMap imap) {
+	protected void setActionPanelShortCut(JPanel painel) {
+		// Damos um nome para cada ação. Esse nome é útil pois mais de
+		// uma tecla pode ser associada a cada ação, como veremos abaixo
+		ActionMap actionMap = painel.getActionMap();
+		actionMap.put("cancelar", cancelar);
+		painel.setActionMap(actionMap);
+		InputMap imap = painel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+		imap = setDefaultActions(imap);
+	}
+
+	protected InputMap setDefaultActions(InputMap imap) {
 //        imap.put(KeyStroke.getKeyStroke("F1"), "botao1");
-        //salvar
+		// salvar
 //        imap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK), "salvar");// salvar
-        //cancelar
-        imap.put(KeyStroke.getKeyStroke("ESCAPE"), "cancelar");// sai da tela
-        return imap;
+		// cancelar
+		imap.put(KeyStroke.getKeyStroke("ESCAPE"), "cancelar");// sai da tela
+		return imap;
 
-    }
+	}
 
-    public T getModel() {
-        return model;
-    }
+	public T getModel() {
+		return model;
+	}
 
 }

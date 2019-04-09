@@ -13,11 +13,11 @@ import java.awt.event.KeyEvent;
  */
 public class EventosUtil {
 
-    public static boolean getEnterEvent(java.awt.event.KeyEvent evt) {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            return true;
-        }
-        return false;
-    }
+	public static boolean getEnterEvent(java.awt.event.KeyEvent evt) {
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+			return true;
+		}
+		return false;
+	}
 
 }

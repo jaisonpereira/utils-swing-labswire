@@ -11,10 +11,12 @@ import javax.swing.JSeparator;
  *
  * @author jpereira
  */
-public class LabsSeparator  extends JSeparator{
- 
-    public LabsSeparator(){
-        this.setBackground(new java.awt.Color(41, 168, 73));
-    }
-    
+public class LabsSeparator extends JSeparator {
+
+	private static final long serialVersionUID = 2735286425385320834L;
+
+	public LabsSeparator() {
+		this.setBackground(new java.awt.Color(41, 168, 73));
+	}
+
 }

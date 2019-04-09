@@ -11,13 +11,14 @@ import javax.swing.JButton;
  *
  * @author jpereira
  */
-public class LabsButtonMenu  extends JButton{
-    
-    public LabsButtonMenu(){
-        this.setBorder(null);
-        this.setBackground(new java.awt.Color(255, 255, 255));
-        this.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }
-    
-    
+public class LabsButtonMenu extends JButton {
+
+	private static final long serialVersionUID = -8450098026117339864L;
+
+	public LabsButtonMenu() {
+		this.setBorder(null);
+		this.setBackground(new java.awt.Color(255, 255, 255));
+		this.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+	}
+
 }

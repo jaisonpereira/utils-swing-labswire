@@ -20,6 +20,8 @@ import com.wirelabs.swing.dialogs.componentes.type.LabsButtonType;
  */
 public class LabsButton extends JButton {
 
+	private static final long serialVersionUID = 2211903219697114106L;
+
 	private void initialize() {
 		this.setFont(new java.awt.Font("Segoe UI", 0, 14));
 		this.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));

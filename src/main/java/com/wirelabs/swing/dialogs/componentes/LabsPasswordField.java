@@ -9,20 +9,21 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.text.Document;
 
 /**
  *
  * @author jpereira
  */
-public class LabsTextField extends JTextField {
+public class LabsPasswordField extends JPasswordField {
 
-	private static final long serialVersionUID = 8259906191953087738L;
+	private static final long serialVersionUID = -4970037347318603815L;
 
 	public static void main(final String[] args) {
-		final LabsTextField tf = new LabsTextField("");
+		final LabsPasswordField tf = new LabsPasswordField("");
 		tf.setColumns(20);
 		tf.setPlaceholder("All your base are belong to us!");
 		final Font f = tf.getFont();
@@ -32,23 +33,23 @@ public class LabsTextField extends JTextField {
 
 	protected String placeholder;
 
-	public LabsTextField(final Document pDoc, final String pText, final int pColumns) {
+	public LabsPasswordField(final Document pDoc, final String pText, final int pColumns) {
 		super(pDoc, pText, pColumns);
 		initiliaze();
 	}
 
-	public LabsTextField(final int pColumns) {
+	public LabsPasswordField(final int pColumns) {
 		super(pColumns);
 		initiliaze();
 	}
 
-	public LabsTextField(final String placeHolder) {
+	public LabsPasswordField(final String placeHolder) {
 		initiliaze();
 		setPlaceholder(placeHolder);
 
 	}
 
-	public LabsTextField() {
+	public LabsPasswordField() {
 		initiliaze();
 		setPlaceholder("");
 
@@ -58,7 +59,7 @@ public class LabsTextField extends JTextField {
 		setBorder(null);
 	}
 
-	public LabsTextField(final String pText, final int pColumns) {
+	public LabsPasswordField(final String pText, final int pColumns) {
 		super(pText, pColumns);
 		initiliaze();
 	}
@@ -74,6 +75,7 @@ public class LabsTextField extends JTextField {
 		if (placeholder.length() == 0 || getText().length() > 0) {
 			return;
 		}
+
 		final Graphics2D g = (Graphics2D) pG;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(LabsColor.getSuccessColor());
